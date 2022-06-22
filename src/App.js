@@ -1,25 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import "antd/dist/antd.css";
+import AppRouter from './AppRouter';
+import { UserContext } from './context/UserContext'
+import React, { useState } from 'react'
 
-function App() {
+const App = () => {
+
+  const [loggedInUsr, setLoggedInUsr] = useState(null);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+       <UserContext.Provider value={{loggedInUser: loggedInUsr || localStorage.getItem('loggedInUser') , setLoggedInUser: (user) => setLoggedInUsr(user) }}>
+        <AppRouter/>
+        </UserContext.Provider>
     </div>
+
   );
-}
+};
 
 export default App;
