@@ -3,7 +3,13 @@ import React, { useState, useEffect } from 'react'
 import { Row, Col } from 'antd'
 import MovieCard from './MovieCard'
 
-export default function MoviesList({ searchValue, year, type }) {
+export default function MoviesList({
+    searchValue,
+    year,
+    type,
+    favorites,
+    setFavorites,
+}) {
     const [movies, setMovies] = useState([])
     const getMovies = () => {
         try {
@@ -34,13 +40,31 @@ export default function MoviesList({ searchValue, year, type }) {
 
     useEffect(() => {
         getMovies()
-    }, [searchValue, year, type])
+    }, [searchValue, year, type, favorites])
 
     let movieCards = () => {
         if (movies && movies.length > 0) {
             return movies.map((movie, index) => (
                 <Col key={index}>
-                    <MovieCard movie={movie} />
+                    <MovieCard
+                        movie={movie}
+                        favorites={favorites}
+                        setFavorites={setFavorites}
+                    />
+                </Col>
+            ))
+        }
+    }
+
+    let favoriteMovies = () => {
+        if (favorites && favorites.length > 0) {
+            return favorites.map((movie, index) => (
+                <Col key={index}>
+                    <MovieCard
+                        movie={movie}
+                        favorites={favorites}
+                        setFavorites={setFavorites}
+                    />
                 </Col>
             ))
         }
@@ -49,6 +73,8 @@ export default function MoviesList({ searchValue, year, type }) {
     return (
         <div>
             <Row>{movieCards()}</Row>
+            <h1>Your Favourites</h1>
+            <Row>{favoriteMovies()}</Row>
         </div>
     )
 }

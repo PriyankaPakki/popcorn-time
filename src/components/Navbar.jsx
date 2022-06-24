@@ -19,6 +19,9 @@ const Navbar = ({
             <Header>
                 <div className="logo" />
                 <Menu theme="dark" mode="horizontal">
+                    <Menu.Item key="appname">
+                        <h1 style={{ color: 'white' }}>Popcorn Time</h1>
+                    </Menu.Item>
                     <Menu.Item key="searchbox">
                         <Searchbox
                             searchValue={searchValue}

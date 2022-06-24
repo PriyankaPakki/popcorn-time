@@ -6,6 +6,7 @@ export default function Movies() {
     const [searchValue, setSearchValue] = useState('god')
     const [year, setYear] = useState('')
     const [type, setType] = useState('')
+    const [favorites, setFavorites] = useState([])
 
     const handleTypeChange = (e) => {
         setType(e.target.value)
@@ -20,7 +21,11 @@ export default function Movies() {
         setSearchValue(event.target.value || 'God')
     }
 
-    // const handleYear
+    const addToFavorites = (movie) => {
+        setFavorites([...favorites, movie])
+    }
+
+    console.log(favorites)
 
     return (
         <div>
@@ -32,7 +37,13 @@ export default function Movies() {
                 type={type}
                 setType={handleTypeChange}
             ></Navbar>
-            <MoviesList searchValue={searchValue} year={year} type={type} />
+            <MoviesList
+                searchValue={searchValue}
+                year={year}
+                type={type}
+                favorites={favorites}
+                setFavorites={addToFavorites}
+            />
         </div>
     )
 }

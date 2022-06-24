@@ -1,7 +1,10 @@
-import { Card } from 'antd'
+import { HeartOutlined } from '@ant-design/icons'
+import { Card, Row, Col, Button } from 'antd'
+
 const { Meta } = Card
 
-const MovieCard = ({ movie }) => {
+const MovieCard = ({ movie, favorites, setFavorites }) => {
+    const movieLink = ''
     return (
         <div>
             <Card
@@ -19,9 +22,40 @@ const MovieCard = ({ movie }) => {
                     ></img>
                 }
             >
-                <Meta title={movie.Title} description={movie.Year} />
+                <Meta
+                    className="card-description"
+                    title={movie.Title}
+                    description={
+                        <MovieCardDescription
+                            movie={movie}
+                            year={movie.Year}
+                            favorites={favorites}
+                            setFavorites={setFavorites}
+                        />
+                    }
+                />
             </Card>
         </div>
+    )
+}
+
+function MovieCardDescription({ year, setFavorites, favorites, movie }) {
+    return (
+        <Row>
+            <Col span={18}>{year}</Col>
+            <Col span={6}>
+                <Button
+                    shape="circle"
+                    ghost={true}
+                    icon={
+                        <HeartOutlined
+                            style={{ color: 'red', fontSize: '20px' }}
+                        />
+                    }
+                    onClick={() => setFavorites(movie)}
+                ></Button>
+            </Col>
+        </Row>
     )
 }
 
