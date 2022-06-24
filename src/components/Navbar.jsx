@@ -2,11 +2,17 @@ import React, { useContext } from 'react'
 import { UserContext } from '../context/UserContext'
 import Searchbox from './Searchbox'
 import { Header } from 'antd/lib/layout/layout'
-import { Menu, DatePicker } from 'antd'
+import { Menu, DatePicker, Radio } from 'antd'
 
-const Navbar = ({ searchValue, setSearchValue, year, setYear }) => {
+const Navbar = ({
+    searchValue,
+    setSearchValue,
+    year,
+    setYear,
+    type,
+    setType,
+}) => {
     const { loggedInUser } = useContext(UserContext)
-    const maxYear = 2022
 
     return (
         <div>
@@ -23,10 +29,27 @@ const Navbar = ({ searchValue, setSearchValue, year, setYear }) => {
                         <DatePicker
                             onChange={setYear}
                             picker="year"
-                            disabledDate={(d) => !d || d.isAfter('2022-06-25')}
+                            disabledDate={(d) => !d || d.isAfter('2022-12-31')}
                             allowClear={true}
                         />
                     </Menu.Item>
+                    <Menu.Item key="type">
+                        <Radio.Group onChange={setType} value={type}>
+                            <Radio value={''} style={{ color: '#ffffff' }}>
+                                All
+                            </Radio>
+                            <Radio value={'movie'} style={{ color: '#ffffff' }}>
+                                Movies
+                            </Radio>
+                            <Radio
+                                value={'series'}
+                                style={{ color: '#ffffff' }}
+                            >
+                                Series
+                            </Radio>
+                        </Radio.Group>
+                    </Menu.Item>
+
                     <Menu.Item key="user">
                         {' '}
                         <h2 style={{ color: 'white' }}>Hi {loggedInUser}</h2>

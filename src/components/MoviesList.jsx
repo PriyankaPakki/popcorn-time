@@ -3,16 +3,19 @@ import React, { useState, useEffect } from 'react'
 import { Row, Col } from 'antd'
 import MovieCard from './MovieCard'
 
-export default function MoviesList({ searchValue, year }) {
+export default function MoviesList({ searchValue, year, type }) {
     const [movies, setMovies] = useState([])
     const getMovies = () => {
         try {
-            let url
+            let url = `http://www.omdbapi.com/?s=${searchValue}`
             if (year) {
-                url = `http://www.omdbapi.com/?s=${searchValue}&y=${year}&apikey=16328196`
-            } else {
-                url = `http://www.omdbapi.com/?s=${searchValue}&apikey=16328196`
+                url += `&y=${year}`
             }
+            if (type) {
+                url += `&type=${type}`
+            }
+            url += `&apikey=16328196`
+            console.log(url)
             return axios.get(url).then((response) => {
                 console.log(response.data.Search)
                 if (response.data.Response && response.data.Search) {
@@ -31,7 +34,7 @@ export default function MoviesList({ searchValue, year }) {
 
     useEffect(() => {
         getMovies()
-    }, [searchValue, year])
+    }, [searchValue, year, type])
 
     let movieCards = () => {
         if (movies && movies.length > 0) {
