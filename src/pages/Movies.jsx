@@ -3,18 +3,16 @@ import Navbar from '../components/Navbar'
 import MoviesList from '../components/MoviesList'
 
 export default function Movies() {
-    // const [queryParams, setQueryParams] = useState({
-    //     searchValue: 'god',
-    //     year: null,
-    //     type: null,
-    //     plot: "full"
-
-    // })
     const [searchValue, setSearchValue] = useState('god')
-    // const [year, setYear] = useState(2000)
+    const [year, setYear] = useState('')
+
+    const handleYearChange = (date, dateString) => {
+        setYear(parseInt(dateString))
+    }
 
     const handleInputChange = (event) => {
-        setSearchValue(event.target.value || 'god')
+        event.persist()
+        setSearchValue(event.target.value || 'God')
     }
 
     // const handleYear
@@ -24,8 +22,10 @@ export default function Movies() {
             <Navbar
                 searchValue={searchValue}
                 setSearchValue={handleInputChange}
+                year={year}
+                setYear={handleYearChange}
             ></Navbar>
-            <MoviesList searchValue={searchValue} />
+            <MoviesList searchValue={searchValue} year={year} />
         </div>
     )
 }

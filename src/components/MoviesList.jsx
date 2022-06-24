@@ -3,23 +3,27 @@ import React, { useState, useEffect } from 'react'
 import { Row, Col } from 'antd'
 import MovieCard from './MovieCard'
 
-export default function MoviesList({ searchValue }) {
+export default function MoviesList({ searchValue, year }) {
     const [movies, setMovies] = useState([])
-
     const getMovies = () => {
         try {
-            return axios
-                .get(`http://www.omdbapi.com/?s=${searchValue}&apikey=16328196`)
-                .then((response) => {
-                    if (response.data.Response) {
-                        console.log(
-                            `Got ${
-                                Object.entries(response.data.Search).length
-                            } movies`
-                        )
-                    }
-                    setMovies(response.data.Search)
-                })
+            let url
+            if (year) {
+                url = `http://www.omdbapi.com/?s=${searchValue}&y=${year}&apikey=16328196`
+            } else {
+                url = `http://www.omdbapi.com/?s=${searchValue}&apikey=16328196`
+            }
+            return axios.get(url).then((response) => {
+                console.log(response.data.Search)
+                if (response.data.Response && response.data.Search) {
+                    console.log(
+                        `Got ${
+                            Object.entries(response.data.Search).length
+                        } movies`
+                    )
+                }
+                setMovies(response.data.Search)
+            })
         } catch (error) {
             console.error(error)
         }
@@ -27,17 +31,21 @@ export default function MoviesList({ searchValue }) {
 
     useEffect(() => {
         getMovies()
-    }, [searchValue])
+    }, [searchValue, year])
+
+    let movieCards = () => {
+        if (movies && movies.length > 0) {
+            return movies.map((movie, index) => (
+                <Col key={index}>
+                    <MovieCard movie={movie} />
+                </Col>
+            ))
+        }
+    }
 
     return (
         <div>
-            <Row>
-                {movies.map((movie, index) => (
-                    <Col key={index}>
-                        <MovieCard movie={movie} />
-                    </Col>
-                ))}
-            </Row>
+            <Row>{movieCards()}</Row>
         </div>
     )
 }
