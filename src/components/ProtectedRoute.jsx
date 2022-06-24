@@ -5,7 +5,6 @@ import React, { useContext } from 'react'
 export const ProtectedRoute = ({ children }) => {
     const { loggedInUser } = useContext(UserContext)
     if (loggedInUser) {
-        console.log('authenticated')
         return children
     }
     return (
