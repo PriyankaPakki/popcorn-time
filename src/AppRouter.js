@@ -4,6 +4,7 @@ import Login from './pages/Login'
 import Movies from './pages/Movies'
 import { ProtectedRoute } from './components/ProtectedRoute'
 import React from 'react'
+import MovieDetails from './components/MovieDetails'
 
 
 
@@ -18,6 +19,7 @@ const AppRouter = () => {
                         <Movies/>
                     </ProtectedRoute>
                 } />
+                <Route path="/:imdbID" element={<MovieDetails/>}></Route>
             </Routes>
         </Router>
     )

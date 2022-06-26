@@ -4,7 +4,7 @@ import { Card, Row, Col, Button } from 'antd'
 const { Meta } = Card
 
 const MovieCard = ({ movie, favorites, setFavorites }) => {
-    const movieLink = ''
+    // const movieLink = `http://www.omdbapi.com/?s=${movie.imdbID}&apikey=16328196`
     return (
         <div>
             <Card

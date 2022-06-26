@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { useState, useEffect } from 'react'
 import { Row, Col } from 'antd'
 import MovieCard from './MovieCard'
+import { Link } from 'react-router-dom'
 
 export default function MoviesList({
     searchValue,
@@ -46,11 +47,13 @@ export default function MoviesList({
         if (movies && movies.length > 0) {
             return movies.map((movie, index) => (
                 <Col key={index}>
-                    <MovieCard
-                        movie={movie}
-                        favorites={favorites}
-                        setFavorites={setFavorites}
-                    />
+                    <Link to={`/${movie.imdbID}`}>
+                        <MovieCard
+                            movie={movie}
+                            favorites={favorites}
+                            setFavorites={setFavorites}
+                        />
+                    </Link>
                 </Col>
             ))
         }
