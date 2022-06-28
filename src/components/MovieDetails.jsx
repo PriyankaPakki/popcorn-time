@@ -24,10 +24,10 @@ export default function MovieDetails() {
     return (
         <div className="movie-card-container">
             <div className="image-container">
-                <div
+                {/* <div
                     className="bg-image"
                     style={{ backgroundImage: `url(${Poster})` }}
-                />
+                /> */}
                 <img src={Poster} alt="" />
             </div>
             <div className="movie-info">

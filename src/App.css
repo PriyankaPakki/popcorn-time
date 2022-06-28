@@ -44,7 +44,7 @@ div.card-description > div.ant-card-meta-detail{
 
 .movie-card-container {
   background-color: #fff;
-  border-radius: 10px;
+  border-radius: 10px !important;
   -webkit-box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14),
       0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -7px rgba(0, 0, 0, 0.2);
   box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14),
@@ -52,12 +52,12 @@ div.card-description > div.ant-card-meta-detail{
   overflow: hidden;
   display: flex;
   min-height: 420px;
+  width: 70%;
   margin: 0 auto 50px;
 }
 
 .image-container {
-  -webkit-clip-path: circle(90% at 30px 30px);
-  clip-path: circle(90% at 30px 30px);
+  border-radius: 10px !important;
   flex: 4;
 }
 
@@ -74,9 +74,9 @@ div.card-description > div.ant-card-meta-detail{
   flex: 3;
   flex-direction: column;
   align-items: flex-end;
-  justify-content: space-between;
+  justify-content: space-around;
   text-align: right;
-  padding: 30px 20px 30px 0;
+  padding: 30px 20px 30px 50px;
   z-index: 1;
 }
 

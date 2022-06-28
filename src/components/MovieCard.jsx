@@ -1,10 +1,11 @@
 import { HeartOutlined } from '@ant-design/icons'
 import { Card, Row, Col, Button } from 'antd'
-
+import { Link, Navigate, useNavigate } from 'react-router-dom'
 const { Meta } = Card
 
-const MovieCard = ({ movie, favorites, setFavorites }) => {
+const MovieCard = ({ movie, favorites, setFavorites, link }) => {
     // const movieLink = `http://www.omdbapi.com/?s=${movie.imdbID}&apikey=16328196`
+    let navigate = useNavigate()
     return (
         <div>
             <Card
@@ -21,6 +22,9 @@ const MovieCard = ({ movie, favorites, setFavorites }) => {
                         style={{ height: 200 }}
                     ></img>
                 }
+                onClick={() => {
+                    navigate(`/movies/${movie.imdbID}`)
+                }}
             >
                 <Meta
                     className="card-description"
@@ -31,6 +35,7 @@ const MovieCard = ({ movie, favorites, setFavorites }) => {
                             year={movie.Year}
                             favorites={favorites}
                             setFavorites={setFavorites}
+                            link={link}
                         />
                     }
                 />
@@ -52,7 +57,10 @@ function MovieCardDescription({ year, setFavorites, favorites, movie }) {
                             style={{ color: 'red', fontSize: '20px' }}
                         />
                     }
-                    onClick={() => setFavorites(movie)}
+                    onClick={(e) => {
+                        e.stopPropagation()
+                        setFavorites(movie)
+                    }}
                 ></Button>
             </Col>
         </Row>

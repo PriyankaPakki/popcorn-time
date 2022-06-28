@@ -2,6 +2,7 @@ import "antd/dist/antd.css";
 import AppRouter from './AppRouter';
 import { UserContext } from './context/UserContext'
 import React, { useState } from 'react'
+import './App.css';
 
 const App = () => {
 

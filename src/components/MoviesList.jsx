@@ -47,13 +47,12 @@ export default function MoviesList({
         if (movies && movies.length > 0) {
             return movies.map((movie, index) => (
                 <Col key={index}>
-                    <Link to={`/${movie.imdbID}`}>
-                        <MovieCard
-                            movie={movie}
-                            favorites={favorites}
-                            setFavorites={setFavorites}
-                        />
-                    </Link>
+                    <MovieCard
+                        movie={movie}
+                        favorites={favorites}
+                        setFavorites={setFavorites}
+                        link={movie.imdbID}
+                    />
                 </Col>
             ))
         }
