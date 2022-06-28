@@ -11,16 +11,20 @@ const MovieCard = ({ movie, favorites, setFavorites, link }) => {
                 hoverable
                 style={{
                     width: 300,
-                    height: 350,
+                    height: 400,
                     margin: 20,
                     borderRadius: 20,
-                    padding: 20,
+                    // padding: 20,
                 }}
                 cover={
                     <img
                         src={movie.Poster}
                         alt="movie"
-                        style={{ height: 200 }}
+                        style={{
+                            height: 250,
+                            minWidth: 300,
+                            objectFit: 'contain',
+                        }}
                     ></img>
                 }
                 onClick={() => {

@@ -56,6 +56,7 @@ const Navbar = ({
                             picker="year"
                             disabledDate={(d) => !d || d.isAfter('2022-12-31')}
                             allowClear={true}
+                            // value={new Date(year)}
                         />
                     </Menu.Item>
                     <Menu.Item key="type">

@@ -9,6 +9,7 @@ function Searchbox({ searchValue, setSearchValue, handleSearchInputChange }) {
                 onChange={handleSearchInputChange}
                 name="searchbox"
                 style={{ width: 200 }}
+                value={searchValue}
             ></Input>
             <Button type="default" onClick={setSearchValue}>
                 Go

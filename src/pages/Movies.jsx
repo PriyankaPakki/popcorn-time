@@ -1,14 +1,21 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Navbar from '../components/Navbar'
 import MoviesList from '../components/MoviesList'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 
 export default function Movies() {
-    const [searchValue, setSearchValue] = useState('toy')
-    const [year, setYear] = useState('')
-    const [type, setType] = useState('')
+    const [queryParams, setQueryParams] = useSearchParams()
+
+    const [searchValue, setSearchValue] = useState(
+        queryParams.get('searchValue') || 'toy'
+    )
+    const [year, setYear] = useState(queryParams.get('year') || '')
+    const [type, setType] = useState(queryParams.get('type') || '')
     const [favorites, setFavorites] = useState({})
-    let navigate = useNavigate()
+
+    useEffect(() => {
+        setQueryParams({ searchValue: searchValue, year: year, type: type })
+    }, [searchValue, year, type])
 
     let searchTerm
 
