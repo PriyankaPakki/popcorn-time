@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom'
 const Navbar = ({
     searchValue,
     setSearchValue,
+    handleSearchInputChange,
     year,
     setYear,
     type,
@@ -24,16 +25,29 @@ const Navbar = ({
 
     return (
         <div>
-            <Header>
-                <div className="logo" />
-                <Menu theme="dark" mode="horizontal">
+            <nav>
+                <div className="" />
+                <Menu
+                    theme="dark"
+                    mode="horizontal"
+                    style={{ padding: 20, height: 'auto' }}
+                >
+                    <Menu.Item key="icon">
+                        <img
+                            style={{ width: 50, height: 50 }}
+                            src="../popcorn.png"
+                            alt="logo"
+                        ></img>
+                    </Menu.Item>
                     <Menu.Item key="appname">
                         <h1 style={{ color: 'white' }}>Popcorn Time</h1>
                     </Menu.Item>
+
                     <Menu.Item key="searchbox">
                         <Searchbox
                             searchValue={searchValue}
                             setSearchValue={setSearchValue}
+                            handleSearchInputChange={handleSearchInputChange}
                         />
                     </Menu.Item>
                     <Menu.Item key="yearbox">
@@ -71,7 +85,7 @@ const Navbar = ({
                         </Button>
                     </Menu.Item>
                 </Menu>
-            </Header>
+            </nav>
         </div>
     )
 }

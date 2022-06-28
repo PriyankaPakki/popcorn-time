@@ -24,7 +24,7 @@ const Home = () => {
     const handleLogin = () => {
         localStorage.setItem('loggedInUser', user.username)
         setLoggedInUser(user.username)
-        navigate('movies')
+        navigate('home')
     }
 
     return (

@@ -14,12 +14,12 @@ const AppRouter = () => {
         <Router>
             <Routes>
                 <Route path="/" element={<Login></Login>}></Route>
-                <Route path='/movies' element={
+                <Route path='/home' element={
                     <ProtectedRoute>
                         <Movies/>
                     </ProtectedRoute>
                 } />
-                <Route path="movies/:imdbID" element={<MovieDetails/>}></Route>
+                <Route path="home/:imdbID" element={<MovieDetails/>}></Route>
 
             </Routes>
         </Router>

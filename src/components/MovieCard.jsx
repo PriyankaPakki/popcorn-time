@@ -1,4 +1,4 @@
-import { HeartOutlined } from '@ant-design/icons'
+import { HeartFilled } from '@ant-design/icons'
 import { Card, Row, Col, Button } from 'antd'
 import { useNavigate } from 'react-router-dom'
 const { Meta } = Card
@@ -10,9 +10,11 @@ const MovieCard = ({ movie, favorites, setFavorites, link }) => {
             <Card
                 hoverable
                 style={{
-                    width: 240,
-                    miHight: 300,
+                    width: 300,
+                    height: 350,
                     margin: 20,
+                    borderRadius: 20,
+                    padding: 20,
                 }}
                 cover={
                     <img
@@ -22,14 +24,17 @@ const MovieCard = ({ movie, favorites, setFavorites, link }) => {
                     ></img>
                 }
                 onClick={() => {
-                    navigate(`/movies/${movie.imdbID}`)
+                    navigate(`/home/${movie.imdbID}`)
                 }}
             >
                 <Meta
                     className="card-description"
-                    title={movie.Title}
+                    title={
+                        <div style={{ overflow: 'hidden' }}>{movie.Title}</div>
+                    }
                     description={
                         <MovieCardDescription
+                            style={{ width: 300 }}
                             movie={movie}
                             year={movie.Year}
                             favorites={favorites}
@@ -52,7 +57,7 @@ function MovieCardDescription({ year, setFavorites, favorites, movie }) {
                     shape="circle"
                     ghost={true}
                     icon={
-                        <HeartOutlined
+                        <HeartFilled
                             style={{ color: 'red', fontSize: '20px' }}
                         />
                     }

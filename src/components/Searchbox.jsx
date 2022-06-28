@@ -1,14 +1,18 @@
-import { Input } from 'antd'
+import { Input, Button } from 'antd'
 import React from 'react'
 
-function Searchbox({ searchValue, setSearchValue }) {
+function Searchbox({ searchValue, setSearchValue, handleSearchInputChange }) {
     return (
         <div>
             <Input
                 placeholder="Enter Movie or Series Title"
-                onChange={setSearchValue}
+                onChange={handleSearchInputChange}
                 name="searchbox"
+                style={{ width: 200 }}
             ></Input>
+            <Button type="default" onClick={setSearchValue}>
+                Go
+            </Button>
         </div>
     )
 }

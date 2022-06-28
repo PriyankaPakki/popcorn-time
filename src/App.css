@@ -2,6 +2,10 @@
   text-align: center;
 }
 
+body{
+  background-color: #000;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -40,6 +44,11 @@ div.card-description > div.ant-card-meta-detail{
   to {
     transform: rotate(360deg);
   }
+}
+
+.ant-card-meta-title {
+  white-space: pre-line;
+  min-width: 200px;
 }
 
 .movie-card-container {

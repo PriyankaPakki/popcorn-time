@@ -79,7 +79,7 @@ export default function MoviesList({
     return (
         <div>
             <Row>{movieCards()}</Row>
-            <h1>Your Favourites</h1>
+            <h1 style={{ color: 'white' }}>Your Favourites</h1>
             <Row>{favoriteMovies()}</Row>
         </div>
     )
