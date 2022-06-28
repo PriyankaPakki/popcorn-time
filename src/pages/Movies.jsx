@@ -3,10 +3,10 @@ import Navbar from '../components/Navbar'
 import MoviesList from '../components/MoviesList'
 
 export default function Movies() {
-    const [searchValue, setSearchValue] = useState('god')
+    const [searchValue, setSearchValue] = useState('toy')
     const [year, setYear] = useState('')
     const [type, setType] = useState('')
-    const [favorites, setFavorites] = useState([])
+    const [favorites, setFavorites] = useState({})
 
     const handleTypeChange = (e) => {
         setType(e.target.value)
@@ -18,14 +18,24 @@ export default function Movies() {
 
     const handleInputChange = (event) => {
         event.persist()
-        setSearchValue(event.target.value || 'God')
+        setSearchValue(event.target.value || 'toy')
     }
+
+    let newFavs
 
     const addToFavorites = (movie) => {
-        setFavorites([...favorites, movie])
+        let movieId = movie.imdbID
+        if (movieId in favorites) {
+            newFavs = { ...favorites }
+            delete newFavs[movieId]
+            setFavorites(newFavs)
+        } else {
+            setFavorites((favorites) => ({
+                ...favorites,
+                [movie.imdbID]: movie,
+            }))
+        }
     }
-
-    console.log(favorites)
 
     return (
         <div>

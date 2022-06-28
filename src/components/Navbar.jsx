@@ -2,7 +2,8 @@ import React, { useContext } from 'react'
 import { UserContext } from '../context/UserContext'
 import Searchbox from './Searchbox'
 import { Header } from 'antd/lib/layout/layout'
-import { Menu, DatePicker, Radio } from 'antd'
+import { Menu, DatePicker, Radio, Button } from 'antd'
+import { useNavigate } from 'react-router-dom'
 
 const Navbar = ({
     searchValue,
@@ -12,7 +13,14 @@ const Navbar = ({
     type,
     setType,
 }) => {
+    const navigate = useNavigate()
+
     const { loggedInUser } = useContext(UserContext)
+
+    function handleLogout() {
+        localStorage.removeItem('loggedInUser')
+        navigate('/')
+    }
 
     return (
         <div>
@@ -56,6 +64,11 @@ const Navbar = ({
                     <Menu.Item key="user">
                         {' '}
                         <h2 style={{ color: 'white' }}>Hi {loggedInUser}</h2>
+                    </Menu.Item>
+                    <Menu.Item key="logout">
+                        <Button type="primary" onClick={handleLogout}>
+                            Logout
+                        </Button>
                     </Menu.Item>
                 </Menu>
             </Header>

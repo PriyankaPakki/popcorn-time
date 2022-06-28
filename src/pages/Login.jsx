@@ -11,8 +11,6 @@ const Home = () => {
 
     let navigate = useNavigate()
 
-    // const [registeredUsers, setRegisteredUsers] = useState({})
-
     const { setLoggedInUser } = useContext(UserContext)
 
     const handleInputChange = (event) => {
@@ -22,13 +20,6 @@ const Home = () => {
             [event.target.name]: event.target.value,
         }))
     }
-    // const handleSignup = () => {
-    //     setRegisteredUsers({
-    //         ...registeredUsers,
-    //         [user.username]: user.password,
-    //     })
-    // }
-    // console.log('ru', registeredUsers)
 
     const handleLogin = () => {
         localStorage.setItem('loggedInUser', user.username)
@@ -74,12 +65,6 @@ const Home = () => {
                             ></Input>
                         </div>
                         <Row style={{ margin: '10px' }}>
-                            {/* <Col span={4}>
-                                <Button type="link" onClick={handleSignup}>
-                                    Signup
-                                </Button>
-                            </Col> */}
-                            {/* <Col span={4} offset={16}> */}
                             <Col span={4}>
                                 <Button type="primary" onClick={handleLogin}>
                                     Login

@@ -1,10 +1,9 @@
 import { HeartOutlined } from '@ant-design/icons'
 import { Card, Row, Col, Button } from 'antd'
-import { Link, Navigate, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 const { Meta } = Card
 
 const MovieCard = ({ movie, favorites, setFavorites, link }) => {
-    // const movieLink = `http://www.omdbapi.com/?s=${movie.imdbID}&apikey=16328196`
     let navigate = useNavigate()
     return (
         <div>

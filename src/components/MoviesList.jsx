@@ -2,7 +2,6 @@ import axios from 'axios'
 import React, { useState, useEffect } from 'react'
 import { Row, Col } from 'antd'
 import MovieCard from './MovieCard'
-import { Link } from 'react-router-dom'
 
 export default function MoviesList({
     searchValue,
@@ -22,16 +21,16 @@ export default function MoviesList({
                 url += `&type=${type}`
             }
             url += `&apikey=16328196`
-            console.log(url)
+            // console.log(url)
             return axios.get(url).then((response) => {
-                console.log(response.data.Search)
-                if (response.data.Response && response.data.Search) {
-                    console.log(
-                        `Got ${
-                            Object.entries(response.data.Search).length
-                        } movies`
-                    )
-                }
+                // console.log(response.data.Search)
+                // if (response.data.Response && response.data.Search) {
+                //     console.log(
+                //         `Got ${
+                //             Object.entries(response.data.Search).length
+                //         } movies`
+                //     )
+                // }
                 setMovies(response.data.Search)
             })
         } catch (error) {
@@ -59,17 +58,22 @@ export default function MoviesList({
     }
 
     let favoriteMovies = () => {
-        if (favorites && favorites.length > 0) {
-            return favorites.map((movie, index) => (
-                <Col key={index}>
-                    <MovieCard
-                        movie={movie}
-                        favorites={favorites}
-                        setFavorites={setFavorites}
-                    />
-                </Col>
-            ))
+        let movieColumns = []
+
+        if (Object.keys(favorites).length > 0) {
+            for (const movieId in favorites) {
+                movieColumns.push(
+                    <Col key={movieId}>
+                        <MovieCard
+                            movie={favorites[movieId]}
+                            favorites={favorites}
+                            setFavorites={setFavorites}
+                        />
+                    </Col>
+                )
+            }
         }
+        return movieColumns
     }
 
     return (
