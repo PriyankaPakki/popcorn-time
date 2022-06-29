@@ -22,9 +22,11 @@ const Home = () => {
     }
 
     const handleLogin = () => {
-        localStorage.setItem('loggedInUser', user.username)
-        setLoggedInUser(user.username)
-        navigate('movies')
+        if (user.username && user.password) {
+            localStorage.setItem('loggedInUser', user.username)
+            setLoggedInUser(user.username)
+            navigate('movies')
+        }
     }
 
     return (
@@ -38,9 +40,7 @@ const Home = () => {
                 <Col span={8} style={{ margin: '50px' }}>
                     <form>
                         <div>
-                            <label style={{ margin: '10px' }}>
-                                Enter Username
-                            </label>
+                            <label style={{ margin: '10px' }}>Username</label>
                             <Input
                                 style={{ margin: '10px' }}
                                 required
@@ -48,13 +48,11 @@ const Home = () => {
                                 name="username"
                                 value={user.username}
                                 onChange={handleInputChange}
+                                placeholder="Enter username"
                             ></Input>
                         </div>
                         <div>
-                            <label style={{ margin: '10px' }}>
-                                {' '}
-                                Enter Password
-                            </label>
+                            <label style={{ margin: '10px' }}> Password</label>
                             <Input
                                 style={{ margin: '10px' }}
                                 required
@@ -62,6 +60,7 @@ const Home = () => {
                                 name="password"
                                 value={user.password}
                                 onChange={handleInputChange}
+                                placeholder="Enter password"
                             ></Input>
                         </div>
                         <Row style={{ margin: '10px' }}>

@@ -27,7 +27,7 @@ const MovieCard = ({ movie, favorites, setFavorites, link }) => {
                     ></img>
                 }
                 onClick={() => {
-                    navigate(`/home/${movie.imdbID}`)
+                    navigate(`/movies/${movie.imdbID}`)
                 }}
             >
                 <Meta

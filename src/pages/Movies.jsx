@@ -55,7 +55,7 @@ export default function Movies() {
     return (
         <div>
             <Navbar
-                searchValue={searchValue}
+                searchValue={searchTerm}
                 handleSearchInputChange={handleInputChange}
                 setSearchValue={handleClick}
                 year={year}
