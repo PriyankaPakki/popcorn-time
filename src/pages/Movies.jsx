@@ -10,7 +10,7 @@ export default function Movies() {
         queryParams.get('searchValue') || 'toy'
     )
     const [year, setYear] = useState(queryParams.get('year') || '')
-    const [type, setType] = useState(queryParams.get('type') || '')
+    const [type, setType] = useState(queryParams.get('type') || 'all')
     const [favorites, setFavorites] = useState({})
 
     useEffect(() => {

@@ -14,7 +14,7 @@ const MovieCard = ({ movie, favorites, setFavorites, link }) => {
                     height: 400,
                     margin: 20,
                     borderRadius: 20,
-                    // padding: 20,
+                    padding: '20px 10px',
                 }}
                 cover={
                     <img
@@ -22,7 +22,6 @@ const MovieCard = ({ movie, favorites, setFavorites, link }) => {
                         alt="movie"
                         style={{
                             height: 250,
-                            minWidth: 300,
                             objectFit: 'contain',
                         }}
                     ></img>

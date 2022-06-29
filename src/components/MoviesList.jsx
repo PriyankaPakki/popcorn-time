@@ -18,7 +18,7 @@ export default function MoviesList({
                 url += `&y=${year}`
             }
             if (type) {
-                url += `&type=${type}`
+                url = type === 'all' ? url : url + `&type=${type}`
             }
             url += `&apikey=16328196`
             // console.log(url)

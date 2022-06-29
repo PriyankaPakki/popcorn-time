@@ -61,7 +61,7 @@ const Navbar = ({
                     </Menu.Item>
                     <Menu.Item key="type">
                         <Radio.Group onChange={setType} value={type}>
-                            <Radio value={''} style={{ color: '#ffffff' }}>
+                            <Radio value={'all'} style={{ color: '#ffffff' }}>
                                 All
                             </Radio>
                             <Radio value={'movie'} style={{ color: '#ffffff' }}>
