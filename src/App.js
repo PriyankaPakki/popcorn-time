@@ -6,7 +6,7 @@ import './App.css';
 
 const App = () => {
 
-  const [loggedInUsr, setLoggedInUsr] = useState(null);
+  const [loggedInUsr, setLoggedInUsr] = useState('');
 
   return (
     <div className="App">

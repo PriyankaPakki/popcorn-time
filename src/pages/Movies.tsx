@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from 'react'
-import Navbar from '../components/Navbar'
 import MoviesList from '../components/MoviesList'
-import { useNavigate, useSearchParams } from 'react-router-dom'
+import { useSearchParams } from 'react-router-dom'
+import { TMovieType } from '../types/TMovieType'
+import Navbar from 'components/Navbar'
+import { RadioChangeEvent } from 'antd'
 
+
+export type TfavoritesType = {
+    [key: string] : TMovieType
+}
 export default function Movies() {
     const [queryParams, setQueryParams] = useSearchParams()
 
@@ -11,35 +17,35 @@ export default function Movies() {
     )
     const [year, setYear] = useState(queryParams.get('year') || '')
     const [type, setType] = useState(queryParams.get('type') || 'all')
-    const [favorites, setFavorites] = useState({})
+    const [favorites, setFavorites] = useState<TfavoritesType>({})
 
     useEffect(() => {
         setQueryParams({ searchValue: searchValue, year: year, type: type })
     }, [searchValue, year, type])
 
-    let searchTerm
 
-    const handleTypeChange = (e) => {
+    const handleTypeChange = (e :RadioChangeEvent) => {
+        console.log(e.target.value);
         setType(e.target.value)
     }
 
-    const handleYearChange = (date, dateString) => {
-        setYear(parseInt(dateString))
+    const handleYearChange = (value: null, dateString: string) => {
+        setYear(dateString)
     }
 
-    const handleInputChange = (event) => {
-        event.persist()
-        searchTerm = event.target.value || 'toy'
+    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        // event.persist()
+        // searchTerm = event.target.value || 'toy'
     }
 
-    const handleClick = (event) => {
-        setSearchValue(searchTerm.trimEnd() || searchValue.trimEnd())
+    const handleClick = (searchText : string | null | undefined) => {
+        searchText && setSearchValue(searchText.trimEnd() || searchValue.trimEnd())
     }
 
-    let newFavs
+    let newFavs : TfavoritesType
 
-    const addToFavorites = (movie) => {
-        let movieId = movie.imdbID
+    const addToFavorites = (movie: TMovieType) => {
+        const movieId = movie.imdbID
         if (movieId in favorites) {
             newFavs = { ...favorites }
             delete newFavs[movieId]
@@ -53,12 +59,12 @@ export default function Movies() {
     }
 
     return (
-        <div>
+        <>
             <Navbar
-                searchValue={searchTerm}
+                searchValue={searchValue}
                 handleSearchInputChange={handleInputChange}
                 setSearchValue={handleClick}
-                year={year}
+                // year={year}
                 setYear={handleYearChange}
                 type={type}
                 setType={handleTypeChange}
@@ -68,8 +74,8 @@ export default function Movies() {
                 year={year}
                 type={type}
                 favorites={favorites}
-                setFavorites={addToFavorites}
+                setFavorite={addToFavorites}
             />
-        </div>
+        </>
     )
 }

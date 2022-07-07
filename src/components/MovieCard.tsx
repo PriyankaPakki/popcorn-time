@@ -2,9 +2,20 @@ import { HeartFilled } from '@ant-design/icons'
 import { Card, Row, Col, Button } from 'antd'
 import { useNavigate } from 'react-router-dom'
 const { Meta } = Card
+import * as React from 'react';
+import { TMovieType } from '../types/TMovieType';
+import { TfavoritesType } from '../pages/Movies';
 
-const MovieCard = ({ movie, favorites, setFavorites, link }) => {
-    let navigate = useNavigate()
+
+type MovieCardProps = {
+    year?: string
+    movie: TMovieType,
+    setFavorite: (type: TMovieType) => void
+
+}
+
+const MovieCard = ({ movie, setFavorite }: MovieCardProps) : React.ReactElement => {
+    const navigate = useNavigate()
     return (
         <div>
             <Card
@@ -37,12 +48,9 @@ const MovieCard = ({ movie, favorites, setFavorites, link }) => {
                     }
                     description={
                         <MovieCardDescription
-                            style={{ width: 300 }}
                             movie={movie}
                             year={movie.Year}
-                            favorites={favorites}
-                            setFavorites={setFavorites}
-                            link={link}
+                            setFavorite={setFavorite}
                         />
                     }
                 />
@@ -51,8 +59,9 @@ const MovieCard = ({ movie, favorites, setFavorites, link }) => {
     )
 }
 
-function MovieCardDescription({ year, setFavorites, favorites, movie }) {
+function MovieCardDescription({ year, setFavorite, movie }: MovieCardProps) {
     return (
+        <div>
         <Row>
             <Col span={18}>{year}</Col>
             <Col span={6}>
@@ -66,11 +75,12 @@ function MovieCardDescription({ year, setFavorites, favorites, movie }) {
                     }
                     onClick={(e) => {
                         e.stopPropagation()
-                        setFavorites(movie)
+                        setFavorite(movie)
                     }}
                 ></Button>
             </Col>
         </Row>
+        </div>
     )
 }
 

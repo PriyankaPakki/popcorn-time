@@ -1,19 +1,28 @@
 import React, { useContext } from 'react'
-import { UserContext } from '../context/UserContext'
 import Searchbox from './Searchbox'
-import { Header } from 'antd/lib/layout/layout'
-import { Menu, DatePicker, Radio, Button } from 'antd'
+import { Menu, DatePicker, Radio, Button, RadioChangeEvent } from 'antd'
 import { useNavigate } from 'react-router-dom'
+import { UserContext } from '../context/UserContext'
+import * as moment from 'moment';
+
+
+type NavbarProps = {
+    searchValue: string,
+    setSearchValue: (searchText : string | null | undefined) => void,
+    handleSearchInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void
+    setYear: (value: null, dateString: string) => void
+    type: string,
+    setType: (e: RadioChangeEvent) => void
+}
 
 const Navbar = ({
     searchValue,
     setSearchValue,
     handleSearchInputChange,
-    year,
     setYear,
     type,
     setType,
-}) => {
+}: NavbarProps) => {
     const navigate = useNavigate()
 
     const { loggedInUser } = useContext(UserContext)
@@ -22,6 +31,8 @@ const Navbar = ({
         localStorage.removeItem('loggedInUser')
         navigate('/')
     }
+
+    const handleGo = (value : string | null | undefined) => {setSearchValue(value)}
 
     return (
         <div>
@@ -46,13 +57,13 @@ const Navbar = ({
                     <Menu.Item key="searchbox">
                         <Searchbox
                             searchValue={searchValue}
-                            setSearchValue={setSearchValue}
+                            setSearchValue={handleGo}
                             handleSearchInputChange={handleSearchInputChange}
                         />
                     </Menu.Item>
                     <Menu.Item key="yearbox">
                         <DatePicker
-                            onChange={setYear}
+                            onChange={(value: moment.Moment | null, dateString: string) => {setYear(null,dateString)}}
                             picker="year"
                             disabledDate={(d) => !d || d.isAfter('2022-12-31')}
                             allowClear={true}
@@ -60,7 +71,7 @@ const Navbar = ({
                         />
                     </Menu.Item>
                     <Menu.Item key="type">
-                        <Radio.Group onChange={setType} value={type}>
+                        <Radio.Group onChange={(e) => {setType(e)}} value={type}>
                             <Radio value={'all'} style={{ color: '#ffffff' }}>
                                 All
                             </Radio>
@@ -90,4 +101,5 @@ const Navbar = ({
         </div>
     )
 }
+
 export default Navbar

@@ -2,10 +2,29 @@ import axios from 'axios'
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 
+
+ type TMovieData = {
+    Title: string, 
+    Released: string, 
+    Genre: string, 
+    Plot: string, 
+    Poster: string, 
+    imdbRating: string
+}
+
+const movieObject:TMovieData = {
+    Title: "", 
+    Released: "", 
+    Genre: "", 
+    Plot: "", 
+    Poster: "", 
+    imdbRating: ""
+}
+
 export default function MovieDetails() {
-    let { imdbID } = useParams()
-    const [movieData, setMovieData] = useState({})
-    const getMovieData = (imdbID) => {
+    const { imdbID }  = useParams<string>()
+    const [movieData, setMovieData] = useState<TMovieData>(movieObject)
+    const getMovieData = (imdbID: string | undefined): Promise<void> => {
         return axios
             .get(
                 `https://www.omdbapi.com/?apikey=16328196&i=${imdbID}&plot=full`
@@ -24,10 +43,6 @@ export default function MovieDetails() {
     return (
         <div className="movie-card-container">
             <div className="image-container">
-                {/* <div
-                    className="bg-image"
-                    style={{ backgroundImage: `url(${Poster})` }}
-                /> */}
                 <img src={Poster} alt="" />
             </div>
             <div className="movie-info">
@@ -39,9 +54,10 @@ export default function MovieDetails() {
                 <h4>Rating: {imdbRating} / 10</h4>
                 <p>{Plot && Plot.substr(0, 350)}</p>
                 <div className="tags-container">
-                    {Genre && Genre.split(', ').map((g) => <span>{g}</span>)}
+                    {Genre && Genre.split(', ').map((g: string) => <span key={g}>{g}</span>)}
                 </div>
             </div>
         </div>
     )
 }
+
