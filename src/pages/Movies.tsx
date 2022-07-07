@@ -9,6 +9,7 @@ import { RadioChangeEvent } from 'antd'
 export type TfavoritesType = {
     [key: string] : TMovieType
 }
+
 export default function Movies() {
     const [queryParams, setQueryParams] = useSearchParams()
 
@@ -33,11 +34,7 @@ export default function Movies() {
         setYear(dateString)
     }
 
-    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        // event.persist()
-        // searchTerm = event.target.value || 'toy'
-    }
-
+    // passing this function down to searchbox and setting the value to the state inside searchbox
     const handleClick = (searchText : string | null | undefined) => {
         searchText && setSearchValue(searchText.trimEnd() || searchValue.trimEnd())
     }
@@ -62,10 +59,8 @@ export default function Movies() {
         <>
             <Navbar
                 searchValue={searchValue}
-                handleSearchInputChange={handleInputChange}
-                setSearchValue={handleClick}
-                // year={year}
-                setYear={handleYearChange}
+                handleSearchClick={handleClick}
+                handleYearChange={handleYearChange}
                 type={type}
                 setType={handleTypeChange}
             ></Navbar>

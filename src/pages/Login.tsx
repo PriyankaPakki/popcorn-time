@@ -26,15 +26,14 @@ const Home = () => {
         if (user.username && user.password) {
             localStorage.setItem('loggedInUser', user.username)
             // setLoggedInUser(user.username)
-            setLoggedInUser()
             navigate('movies')
+            
         }
     }
 
     return (
         <div>
             <Row
-                // type="flex"
                 justify="center"
                 align="top"
                 style={{ minHeight: '100vh' }}

@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom'
 const { Meta } = Card
 import * as React from 'react';
 import { TMovieType } from '../types/TMovieType';
-import { TfavoritesType } from '../pages/Movies';
 
 
 type MovieCardProps = {
@@ -26,6 +25,7 @@ const MovieCard = ({ movie, setFavorite }: MovieCardProps) : React.ReactElement 
                     margin: 20,
                     borderRadius: 20,
                     padding: '20px 10px',
+                    color: "black",
                 }}
                 cover={
                     <img
@@ -44,7 +44,8 @@ const MovieCard = ({ movie, setFavorite }: MovieCardProps) : React.ReactElement 
                 <Meta
                     className="card-description"
                     title={
-                        <div style={{ overflow: 'hidden' }}>{movie.Title}</div>
+                        <div style={{ overflow: 'hidden'
+                    }}>{movie.Title}</div>
                     }
                     description={
                         <MovieCardDescription
@@ -61,7 +62,7 @@ const MovieCard = ({ movie, setFavorite }: MovieCardProps) : React.ReactElement 
 
 function MovieCardDescription({ year, setFavorite, movie }: MovieCardProps) {
     return (
-        <div>
+        <div style={{color: "black"}}>
         <Row>
             <Col span={18}>{year}</Col>
             <Col span={6}>

@@ -8,18 +8,16 @@ import * as moment from 'moment';
 
 type NavbarProps = {
     searchValue: string,
-    setSearchValue: (searchText : string | null | undefined) => void,
-    handleSearchInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void
-    setYear: (value: null, dateString: string) => void
+    handleSearchClick: (searchText : string | null | undefined) => void,
+    handleYearChange: (value: null, dateString: string) => void
     type: string,
     setType: (e: RadioChangeEvent) => void
 }
 
 const Navbar = ({
     searchValue,
-    setSearchValue,
-    handleSearchInputChange,
-    setYear,
+    handleSearchClick,
+    handleYearChange,
     type,
     setType,
 }: NavbarProps) => {
@@ -32,7 +30,7 @@ const Navbar = ({
         navigate('/')
     }
 
-    const handleGo = (value : string | null | undefined) => {setSearchValue(value)}
+    const handleGo = (value : string | null | undefined) => {handleSearchClick(value)}
 
     return (
         <div>
@@ -58,16 +56,14 @@ const Navbar = ({
                         <Searchbox
                             searchValue={searchValue}
                             setSearchValue={handleGo}
-                            handleSearchInputChange={handleSearchInputChange}
                         />
                     </Menu.Item>
                     <Menu.Item key="yearbox">
                         <DatePicker
-                            onChange={(value: moment.Moment | null, dateString: string) => {setYear(null,dateString)}}
+                            onChange={(value: moment.Moment | null, dateString: string) => {handleYearChange(null,dateString)}}
                             picker="year"
                             disabledDate={(d) => !d || d.isAfter('2022-12-31')}
                             allowClear={true}
-                            // value={new Date(year)}
                         />
                     </Menu.Item>
                     <Menu.Item key="type">

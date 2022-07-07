@@ -19,7 +19,11 @@ const AppRouter = () => {
                         <Movies/>
                     </ProtectedRoute>
                 } />
-                <Route path="movies/:imdbID" element={<MovieDetails/>}></Route>
+                <Route path="movies/:imdbID" element={
+                    <ProtectedRoute>
+                        <MovieDetails/>
+                    </ProtectedRoute>
+                }></Route>
 
             </Routes>
         </Router>

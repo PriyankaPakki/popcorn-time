@@ -5,11 +5,10 @@ import React, {useState} from 'react'
 type SearchboxProps = {
    searchValue: string
    setSearchValue: (searchText : string | null | undefined) => void,
-   handleSearchInputChange: (event: any) => void
 }
 
 
-function Searchbox({ searchValue, setSearchValue, handleSearchInputChange }: SearchboxProps) {
+function Searchbox({ setSearchValue }: SearchboxProps) {
     const [searchText, setSearchText] = useState('') 
 
     const handleGoClick = () => {

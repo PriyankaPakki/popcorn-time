@@ -7,7 +7,7 @@ import { TfavoritesType } from '../pages/Movies'
 
 
 type MoviesListProps = {
-    searchValue: string
+   searchValue: string
    year: string,
    type: string,
    favorites: TfavoritesType
