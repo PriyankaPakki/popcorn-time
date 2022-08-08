@@ -1,18 +1,21 @@
 import { Button, Row, Col, Input } from 'antd'
+import { loginUser } from 'api/api'
 import React, { useContext, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { UserContext } from '../context/UserContext'
 
 
 const Home = () => {
     const [user, setUser] = useState({
+        email: '',
         username: '',
         password: '',
     })
 
     const navigate = useNavigate()
+    // const {state} = useLocation()
 
-    const { setLoggedInUser } = useContext(UserContext)
+    const { setLoggedInUser, setAuthToken } = useContext(UserContext)
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         event.persist()
@@ -22,11 +25,17 @@ const Home = () => {
         }))
     }
 
-    const handleLogin = () => {
-        if (user.username && user.password) {
-            localStorage.setItem('loggedInUser', user.username)
-            // setLoggedInUser(user.username)
+    
+    const handleLogin = async() => {
+        if (user.email && user.password) {
+            const response:any =  await loginUser(user.email, user.password)
+            setAuthToken(response.token)
+            setLoggedInUser(user.email)
+            localStorage.setItem('loggedInUser', user.email)
+            localStorage.setItem('auth-token',response.token)
+            // navigate(state?.path || '/movies')
             navigate('movies')
+
             
         }
     }
@@ -41,15 +50,15 @@ const Home = () => {
                 <Col span={8} style={{ margin: '50px' }}>
                     <form>
                         <div>
-                            <label style={{ margin: '10px' }}>Username</label>
+                            <label style={{ margin: '10px' }}>email</label>
                             <Input
                                 style={{ margin: '10px' }}
                                 required
                                 type="text"
-                                name="username"
-                                value={user.username}
+                                name="email"
+                                value={user.email}
                                 onChange={handleInputChange}
-                                placeholder="Enter username"
+                                placeholder="Enter email"
                             ></Input>
                         </div>
                         <div>

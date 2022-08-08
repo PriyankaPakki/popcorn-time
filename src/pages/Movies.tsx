@@ -4,6 +4,7 @@ import { useSearchParams } from 'react-router-dom'
 import { TMovieType } from '../types/TMovieType'
 import Navbar from 'components/Navbar'
 import { RadioChangeEvent } from 'antd'
+import {signupUser} from '../api/api'
 
 
 export type TfavoritesType = {
@@ -23,6 +24,10 @@ export default function Movies() {
     useEffect(() => {
         setQueryParams({ searchValue: searchValue, year: year, type: type })
     }, [searchValue, year, type])
+
+    useEffect(() => {
+        signupUser()
+    })
 
 
     const handleTypeChange = (e :RadioChangeEvent) => {

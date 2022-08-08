@@ -1,4 +1,4 @@
-import { Navigate, useNavigate } from 'react-router-dom'
+import { Navigate, useLocation, useNavigate } from 'react-router-dom'
 import { UserContext } from '../context/UserContext'
 import React, { useContext, useEffect } from 'react'
 
@@ -8,9 +8,10 @@ export const ProtectedRoute = ({children}: {children : React.ReactNode}) => {
 
     const { loggedInUser } = useContext(UserContext)
     const navigate = useNavigate()
+    const location = useLocation()
     useEffect(() => {
         if (!loggedInUser) {
-            navigate('/')
+            navigate('/login')
         }
     }, [])
 
@@ -20,7 +21,7 @@ export const ProtectedRoute = ({children}: {children : React.ReactNode}) => {
 
     return (
         <div>
-            <Navigate to="/" />
+            <Navigate to="/login" state={{ path: location.pathname }} />
         </div>
     )
 }

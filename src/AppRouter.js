@@ -13,13 +13,23 @@ const AppRouter = () => {
     return (
         <Router>
             <Routes>
-                <Route path="/" element={<Login></Login>}></Route>
+                <Route path="/login" element={<Login></Login>}></Route>
                 <Route path='/movies' element={
                     <ProtectedRoute>
                         <Movies/>
                     </ProtectedRoute>
                 } />
                 <Route path="movies/:imdbID" element={
+                    <ProtectedRoute>
+                        <MovieDetails/>
+                    </ProtectedRoute>
+                }></Route>
+                {/* <Route path="movies/:title" element={
+                    <ProtectedRoute>
+                        <MovieDetails/>
+                    </ProtectedRoute>
+                }></Route> */}
+                <Route path="auth/user/:userId/movie/:movieId/togglefavorite" element={
                     <ProtectedRoute>
                         <MovieDetails/>
                     </ProtectedRoute>

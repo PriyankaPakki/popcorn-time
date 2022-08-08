@@ -27,6 +27,7 @@ const Navbar = ({
 
     function handleLogout() {
         localStorage.removeItem('loggedInUser')
+        localStorage.removeItem('auth-token')
         navigate('/')
     }
 
