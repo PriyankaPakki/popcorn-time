@@ -4,7 +4,6 @@ import { useSearchParams } from 'react-router-dom'
 import { TMovieType } from '../types/TMovieType'
 import Navbar from 'components/Navbar'
 import { RadioChangeEvent } from 'antd'
-import {signupUser} from '../api/api'
 
 
 export type TfavoritesType = {
@@ -25,11 +24,6 @@ export default function Movies() {
         setQueryParams({ searchValue: searchValue, year: year, type: type })
     }, [searchValue, year, type])
 
-    useEffect(() => {
-        signupUser()
-    })
-
-
     const handleTypeChange = (e :RadioChangeEvent) => {
         console.log(e.target.value);
         setType(e.target.value)
@@ -47,7 +41,7 @@ export default function Movies() {
     let newFavs : TfavoritesType
 
     const addToFavorites = (movie: TMovieType) => {
-        const movieId = movie.imdbID
+        const movieId = movie.ID
         if (movieId in favorites) {
             newFavs = { ...favorites }
             delete newFavs[movieId]
@@ -55,7 +49,7 @@ export default function Movies() {
         } else {
             setFavorites((favorites) => ({
                 ...favorites,
-                [movie.imdbID]: movie,
+                [movie.ID]: movie,
             }))
         }
     }

@@ -21,7 +21,7 @@ export const ProtectedRoute = ({children}: {children : React.ReactNode}) => {
 
     return (
         <div>
-            <Navigate to="/login" state={{ path: location.pathname }} />
+            <Navigate to="/" state={{ path: location.pathname }} />
         </div>
     )
 }

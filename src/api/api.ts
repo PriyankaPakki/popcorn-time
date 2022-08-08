@@ -8,7 +8,7 @@ const getMovies = async (): Promise<AxiosResponse<any, any>> => {
     return response
 }
 
-const getMovieDetails = async (movieID: number): Promise<AxiosResponse<any, any>> => {
+const getMovieData = async (movieID: number): Promise<AxiosResponse<any, any>> => {
     const response = await axios.get(`${baseurl}/movie/${movieID}`)
     console.log(response);
     return response
@@ -64,6 +64,7 @@ const loginUser = async (email: string, password : string) => {
     return response.data
 }
 
+
 const toggleFavorite = async (userId: string, movieId: string,token: string) => {
     const response = await axios.post(`auth/user/${userId}/movie/${movieId}`, {
         headers : {
@@ -85,6 +86,8 @@ const showFavorites = async(userId: string, token: string) => {
     return response
 }
 
+//function to retrieve username to display in navbar
 
 
-export { getMovies, getMovieDetails, createMovie, updateMovie, deleteMovie, signupUser, loginUser, toggleFavorite, showFavorites }
+
+export { getMovies, getMovieData, createMovie, updateMovie, deleteMovie, signupUser, loginUser, toggleFavorite, showFavorites }

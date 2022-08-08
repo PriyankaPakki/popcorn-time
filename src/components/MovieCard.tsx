@@ -7,7 +7,7 @@ import { TMovieType } from '../types/TMovieType';
 
 
 type MovieCardProps = {
-    year?: string
+    released?: string
     movie: TMovieType,
     setFavorite: (type: TMovieType) => void
 
@@ -29,8 +29,8 @@ const MovieCard = ({ movie, setFavorite }: MovieCardProps) : React.ReactElement 
                 }}
                 cover={
                     <img
-                        src={movie.Poster}
-                        alt="movie"
+                        src={movie.poster}
+                        alt="movie image"
                         style={{
                             height: 250,
                             objectFit: 'contain',
@@ -38,19 +38,19 @@ const MovieCard = ({ movie, setFavorite }: MovieCardProps) : React.ReactElement 
                     ></img>
                 }
                 onClick={() => {
-                    navigate(`/movies/${movie.imdbID}`)
+                    navigate(`/movie/${movie.ID}`)
                 }}
             >
                 <Meta
                     className="card-description"
                     title={
                         <div style={{ overflow: 'hidden'
-                    }}>{movie.Title}</div>
+                    }}>{movie.title}</div>
                     }
                     description={
                         <MovieCardDescription
                             movie={movie}
-                            year={movie.Year}
+                            released={movie.released}
                             setFavorite={setFavorite}
                         />
                     }
@@ -60,11 +60,11 @@ const MovieCard = ({ movie, setFavorite }: MovieCardProps) : React.ReactElement 
     )
 }
 
-function MovieCardDescription({ year, setFavorite, movie }: MovieCardProps) {
+function MovieCardDescription({ released, setFavorite, movie }: MovieCardProps) {
     return (
         <div style={{color: "black"}}>
         <Row>
-            <Col span={18}>{year}</Col>
+            <Col span={18}>{released}</Col>
             <Col span={6}>
                 <Button
                     shape="circle"

@@ -1,7 +1,9 @@
 export type TMovieType = {
-    Poster: string
-    Title: string
-    Type: string
-    Year: string
-    imdbID: string
+    poster: string
+    title: string
+    type: string
+    released: string
+    ID: string
+    rating: number
+    genre: string
 }

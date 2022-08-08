@@ -4,57 +4,60 @@ import { useParams } from 'react-router-dom'
 
 
  type TMovieData = {
-    Title: string, 
-    Released: string, 
-    Genre: string, 
-    Plot: string, 
-    Poster: string, 
-    imdbRating: string
+    title: string, 
+    released: string, 
+    genre: string, 
+    description: string, 
+    poster: string, 
+    rating: string
 }
 
 const movieObject:TMovieData = {
-    Title: "", 
-    Released: "", 
-    Genre: "", 
-    Plot: "", 
-    Poster: "", 
-    imdbRating: ""
+    title: "", 
+    released: "", 
+    genre: "", 
+    description: "", 
+    poster: "", 
+    rating: ""
 }
 
 export default function MovieDetails() {
-    const { imdbID }  = useParams<string>()
+    const { ID }  = useParams<string>()
     const [movieData, setMovieData] = useState<TMovieData>(movieObject)
-    const getMovieData = (imdbID: string | undefined): Promise<void> => {
-        return axios
+    const baseUrl = " http://localhost:9010/movie"
+
+    const getMovieData = async (ID: string | undefined): Promise<void> => {
+        return await axios
             .get(
-                `https://www.omdbapi.com/?apikey=16328196&i=${imdbID}&plot=full`
+                `${baseUrl}/${ID}`
             )
             .then((res) => res.data)
             .then((res) => {
-                setMovieData(res)
+                setMovieData(res.data)
             })
     }
 
     useEffect(() => {
-        getMovieData(imdbID)
-    }, [imdbID])
+        getMovieData(ID)
+    }, [ID])
 
-    const { Title, Released, Genre, Plot, Poster, imdbRating } = movieData
+    const { title, released, genre, description, poster, rating } = movieData
+    
     return (
         <div className="movie-card-container">
             <div className="image-container">
-                <img src={Poster} alt="" />
+                <img src={poster} alt="" />
             </div>
             <div className="movie-info">
                 <h2>Movie Details</h2>
                 <div>
-                    <h1>{Title}</h1>
-                    <small>Released Date: {Released}</small>
+                    <h1>{title}</h1>
+                    <small>Released Date: {released}</small>
                 </div>
-                <h4>Rating: {imdbRating} / 10</h4>
-                <p>{Plot && Plot.substr(0, 350)}</p>
+                <h4>Rating: {rating} / 10</h4>
+                <p>{description && description.substr(0, 350)}</p>
                 <div className="tags-container">
-                    {Genre && Genre.split(', ').map((g: string) => <span key={g}>{g}</span>)}
+                    {genre && genre.split(', ').map((g: string) => <span key={g}>{g}</span>)}
                 </div>
             </div>
         </div>

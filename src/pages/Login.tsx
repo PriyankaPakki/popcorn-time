@@ -1,7 +1,7 @@
 import { Button, Row, Col, Input } from 'antd'
 import { loginUser } from 'api/api'
 import React, { useContext, useState } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { UserContext } from '../context/UserContext'
 
 
@@ -13,7 +13,6 @@ const Home = () => {
     })
 
     const navigate = useNavigate()
-    // const {state} = useLocation()
 
     const { setLoggedInUser, setAuthToken } = useContext(UserContext)
 
@@ -27,6 +26,7 @@ const Home = () => {
 
     
     const handleLogin = async() => {
+        console.log(user)
         if (user.email && user.password) {
             const response:any =  await loginUser(user.email, user.password)
             setAuthToken(response.token)
@@ -34,7 +34,7 @@ const Home = () => {
             localStorage.setItem('loggedInUser', user.email)
             localStorage.setItem('auth-token',response.token)
             // navigate(state?.path || '/movies')
-            navigate('movies')
+            navigate('/movies')
 
             
         }

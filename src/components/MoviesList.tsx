@@ -22,21 +22,21 @@ export default function MoviesList({
     setFavorite,
 }: MoviesListProps) {
 
-    
+    const baseUrl = " http://localhost:9010/movies"
 
     const [movies, setMovies] = useState<TMovieType[]>([])
-    const getMovies = () => {
+    const getMovies = async () => {
         try {
-            let url = `http://www.omdbapi.com/?s=${searchValue}`
+            let url = `${baseUrl}?title=${searchValue}`
             if (year) {
-                url += `&y=${year}`
+                url += `&year=${year}`
             }
-            if (type) {
-                url = type === 'all' ? url : url + `&type=${type}`
-            }
-            url += `&apikey=16328196`
-            return axios.get(url).then((response) => {
-                setMovies(response.data.Search)
+            // if (type) {
+            //     url = type === 'all' ? url : url + `&type=${type}`
+            // }
+            // url += `&apikey=16328196`
+            return await axios.get(url).then((response) => {
+                setMovies(response.data)
             })
         } catch (error) {
             console.error(error)
