@@ -1,28 +1,33 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import MoviesList from '../components/MoviesList'
 import { useSearchParams } from 'react-router-dom'
 import { TMovieType } from '../types/TMovieType'
 import Navbar from 'components/Navbar'
 import { RadioChangeEvent } from 'antd'
+import { UserContext } from 'context/UserContext'
+import { toggleFavorite } from 'api/api'
 
 
 export type TfavoritesType = {
-    [key: string] : TMovieType
+    UserID: string,
+    Movie: TMovieType,
+    MovieID: string
 }
 
 export default function Movies() {
     const [queryParams, setQueryParams] = useSearchParams()
+    const { authToken, loggedInUserId } = useContext(UserContext)
 
     const [searchValue, setSearchValue] = useState(
         queryParams.get('searchValue') || 'toy'
     )
     const [year, setYear] = useState(queryParams.get('year') || '')
     const [type, setType] = useState(queryParams.get('type') || 'all')
-    const [favorites, setFavorites] = useState<TfavoritesType>({})
+    const [favorites, setFavorites] = useState<TfavoritesType[]>([])
 
     useEffect(() => {
         setQueryParams({ searchValue: searchValue, year: year, type: type })
-    }, [searchValue, year, type])
+    }, [searchValue, year, type, favorites])
 
     const handleTypeChange = (e :RadioChangeEvent) => {
         console.log(e.target.value);
@@ -38,20 +43,14 @@ export default function Movies() {
         searchText && setSearchValue(searchText.trimEnd() || searchValue.trimEnd())
     }
 
-    let newFavs : TfavoritesType
+    // let newFavs : TfavoritesType
 
-    const addToFavorites = (movie: TMovieType) => {
+    const addToFavorites = async (movie: TMovieType) => {
         const movieId = movie.ID
-        if (movieId in favorites) {
-            newFavs = { ...favorites }
-            delete newFavs[movieId]
-            setFavorites(newFavs)
-        } else {
-            setFavorites((favorites) => ({
-                ...favorites,
-                [movie.ID]: movie,
-            }))
-        }
+        const userId = loggedInUserId
+        const token = authToken
+        const result:TfavoritesType[] = await toggleFavorite(userId, movieId, token)
+        setFavorites(result)
     }
 
     return (

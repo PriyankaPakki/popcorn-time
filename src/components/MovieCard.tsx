@@ -9,7 +9,7 @@ import { TMovieType } from '../types/TMovieType';
 type MovieCardProps = {
     released?: string
     movie: TMovieType,
-    setFavorite: (type: TMovieType) => void
+    setFavorite: (movie: TMovieType) => void
 
 }
 
@@ -51,7 +51,7 @@ const MovieCard = ({ movie, setFavorite }: MovieCardProps) : React.ReactElement 
                         <MovieCardDescription
                             movie={movie}
                             released={movie.released}
-                            setFavorite={setFavorite}
+                            setFavorite={() => setFavorite(movie)}
                         />
                     }
                 />

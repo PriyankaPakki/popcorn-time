@@ -3,15 +3,15 @@ import React, { useState, useEffect } from 'react'
 import { Row, Col } from 'antd'
 import MovieCard from './MovieCard'
 import { TMovieType } from '../types/TMovieType'
-import { TfavoritesType } from '../pages/Movies'
+import { TfavoritesType } from 'pages/Movies'
 
 
 type MoviesListProps = {
    searchValue: string
    year: string,
    type: string,
-   favorites: TfavoritesType
-   setFavorite: (type: TMovieType) => void
+   favorites: TfavoritesType[],
+   setFavorite: (movie: TMovieType) => void
 }
 
 export default function MoviesList({
@@ -31,10 +31,6 @@ export default function MoviesList({
             if (year) {
                 url += `&year=${year}`
             }
-            // if (type) {
-            //     url = type === 'all' ? url : url + `&type=${type}`
-            // }
-            // url += `&apikey=16328196`
             return await axios.get(url).then((response) => {
                 setMovies(response.data)
             })
@@ -61,20 +57,20 @@ export default function MoviesList({
     }
 
     const favoriteMovies = () => {
-        const movieColumns = []
-
-        if (Object.keys(favorites).length > 0) {
-            for (const movieId in favorites) {
+        const movieColumns: any[] = []
+        if (favorites.length > 0) {
+            favorites.forEach(favorite => {
+                console.log(favorite);
                 movieColumns.push(
-                    <Col key={movieId}>
+                    <Col key={favorite.MovieID}>
                         <MovieCard
-                            movie={favorites[movieId]}
+                            movie={favorite.Movie}
                             setFavorite={setFavorite}
                         />
                     </Col>
                 )
-            }
-        }
+            })
+         }
         return movieColumns
     }
 

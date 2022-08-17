@@ -24,11 +24,6 @@ const AppRouter = () => {
                         <MovieDetails/>
                     </ProtectedRoute>
                 }></Route>
-                {/* <Route path="movies/:title" element={
-                    <ProtectedRoute>
-                        <MovieDetails/>
-                    </ProtectedRoute>
-                }></Route> */}
                 <Route path="auth/user/:userId/movie/:movieId/togglefavorite" element={
                     <ProtectedRoute>
                         <MovieDetails/>

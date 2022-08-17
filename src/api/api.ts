@@ -66,14 +66,18 @@ const loginUser = async (email: string, password : string) => {
 
 
 const toggleFavorite = async (userId: string, movieId: string,token: string) => {
-    const response = await axios.post(`auth/user/${userId}/movie/${movieId}`, {
-        headers : {
+    const config = {
+        headers: {
+            "Access-Control-Allow-Origin": true,
             "x-access-token": token
-        }
-    })
-    console.log(response)
-    return response.data
-
+        }        
+      }
+      
+    const response = await axios.post(`${baseurl}/auth/user/${userId}/movie/${movieId}/togglefavorite`,{
+        "some": "data"
+    }, config
+    )
+    return response.data.data
 }
 
 const showFavorites = async(userId: string, token: string) => {

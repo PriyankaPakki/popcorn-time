@@ -8,6 +8,7 @@ const App = () => {
 
   const [loggedInUsr, setLoggedInUsr] = useState('');
   const [authToken, setAuthToken] = useState('')
+  const [loggedInUserId, setLoggedInUserId] = useState('')
 
   return (
     <div className="App">
@@ -16,7 +17,9 @@ const App = () => {
           loggedInUser: loggedInUsr || localStorage.getItem('loggedInUser') ,
           setLoggedInUser: setLoggedInUsr,
           authToken: authToken || localStorage.getItem('authToken'),
-          setAuthToken: setAuthToken
+          setAuthToken: setAuthToken,
+          loggedInUserId: loggedInUserId || localStorage.getItem('loggedInUser'),
+          setLoggedInUserId: setLoggedInUserId
           }
           }>
         <AppRouter/>

@@ -5,12 +5,16 @@ type TUserContext = {
     setLoggedInUser: (user:string) => void;
     authToken: string;
     setAuthToken: (token: string) => void;
+    loggedInUserId: string;
+    setLoggedInUserId: (token: string) => void
 }
 
 export const UserContext : React.Context<TUserContext> = createContext({
     loggedInUser: '',
     setLoggedInUser: (user) => {},
     authToken: '',
-    setAuthToken: (token) => {}
+    setAuthToken: (token) => {},
+    loggedInUserId: '',
+    setLoggedInUserId: (id) => {}
 })
 

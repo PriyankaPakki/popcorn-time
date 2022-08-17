@@ -14,7 +14,7 @@ const Home = () => {
 
     const navigate = useNavigate()
 
-    const { setLoggedInUser, setAuthToken } = useContext(UserContext)
+    const { setLoggedInUser, setAuthToken, setLoggedInUserId } = useContext(UserContext)
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         event.persist()
@@ -26,17 +26,14 @@ const Home = () => {
 
     
     const handleLogin = async() => {
-        console.log(user)
         if (user.email && user.password) {
             const response:any =  await loginUser(user.email, user.password)
             setAuthToken(response.token)
+            setLoggedInUserId(response.user.ID)
             setLoggedInUser(user.email)
             localStorage.setItem('loggedInUser', user.email)
             localStorage.setItem('auth-token',response.token)
-            // navigate(state?.path || '/movies')
             navigate('/movies')
-
-            
         }
     }
 
